@@ -1,9 +1,11 @@
 package com.chat;
 
 import javax.swing.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server extends JFrame {
     private final ServerSocket serverSocket;
@@ -61,7 +63,6 @@ public class Server extends JFrame {
         for (ClientHandler clientHandler : ClientHandler.clientHandlers) {
             try {
                 clientHandler.outputStream.writeUTF(message);
-                clientHandler.outputStream.flush();
             } catch (Exception e) {
                 display("Error broadcasting message to " + clientHandler.getUsername());
             }

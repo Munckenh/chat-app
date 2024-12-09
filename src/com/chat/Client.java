@@ -34,7 +34,6 @@ public class Client extends JFrame {
             if (!message.isEmpty()) {
                 try {
                     outputStream.writeUTF(this.username + ": " + message);
-                    display(this.username + ": " + message);
                 } catch (IOException ex) {
                     display("Client: Error sending message");
                 }
@@ -75,9 +74,10 @@ public class Client extends JFrame {
 
     private void startListening() {
         new Thread(() -> {
+            String message;
             while (socket.isConnected()) {
                 try {
-                    String message = inputStream.readUTF();
+                    message = inputStream.readUTF();
                     display(message);
                 } catch (IOException e) {
                     close();

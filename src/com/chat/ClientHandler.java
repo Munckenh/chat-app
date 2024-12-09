@@ -1,14 +1,16 @@
 package com.chat;
 
-import java.io.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
-    private final Socket socket;
     final DataInputStream inputStream;
     final DataOutputStream outputStream;
+    private final Socket socket;
     private final String username;
 
     public ClientHandler(Socket socket) throws IOException {
@@ -29,10 +31,7 @@ public class ClientHandler implements Runnable {
     public void broadcast(String message) {
         for (ClientHandler clientHandler : clientHandlers) {
             try {
-                if (!clientHandler.username.equals(this.username)) {
-                    clientHandler.outputStream.writeUTF(message);
-                    clientHandler.outputStream.flush();
-                }
+                clientHandler.outputStream.writeUTF(message);
             } catch (IOException e) {
                 clientHandler.close();
             }
