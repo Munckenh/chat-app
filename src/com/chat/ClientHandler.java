@@ -58,6 +58,7 @@ public class ClientHandler implements Runnable {
         while (socket.isConnected()) {
             try {
                 message = inputStream.readUTF();
+                Server.display(message);
                 broadcast(message);
             } catch (IOException e) {
                 break;

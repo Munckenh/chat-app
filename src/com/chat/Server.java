@@ -13,8 +13,10 @@ public class Server extends JFrame {
     private JTextArea textArea;
     private JTextField textField;
     private JButton sendButton;
+    private static Server instance;
 
     public Server(ServerSocket serverSocket) {
+        instance = this;
         this.serverSocket = serverSocket;
 
         sendButton.addActionListener(_ -> {
@@ -52,11 +54,13 @@ public class Server extends JFrame {
         server.start();
     }
 
-    private void display(String message) {
-        if (!textArea.getText().isEmpty()) {
-            textArea.append("\n");
+    static void display(String message) {
+        if (instance != null) {
+            if (!instance.textArea.getText().isEmpty()) {
+                instance.textArea.append("\n");
+            }
+            instance.textArea.append(message);
         }
-        textArea.append(message);
     }
 
     private void broadcast(String message) {
