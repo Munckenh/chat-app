@@ -31,7 +31,9 @@ public class ClientHandler implements Runnable {
     public void broadcast(String message) {
         for (ClientHandler clientHandler : clientHandlers) {
             try {
-                clientHandler.outputStream.writeUTF(message);
+                if (!clientHandler.username.equals(this.username)) {
+                    clientHandler.outputStream.writeUTF(message);
+                }
             } catch (IOException e) {
                 clientHandler.close();
             }

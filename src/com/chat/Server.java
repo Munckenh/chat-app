@@ -20,8 +20,8 @@ public class Server extends JFrame {
         sendButton.addActionListener(_ -> {
             String message = textField.getText();
             if (!message.isEmpty()) {
-                broadcast("Server: " + message);
                 display("Server: " + message);
+                broadcast("Server: " + message);
                 textField.setText("");
             }
         });

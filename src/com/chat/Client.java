@@ -33,6 +33,7 @@ public class Client extends JFrame {
             String message = textField.getText();
             if (!message.isEmpty()) {
                 try {
+                    display(this.username + ": " + message);
                     outputStream.writeUTF(this.username + ": " + message);
                 } catch (IOException ex) {
                     display("Client: Error sending message");
