@@ -64,6 +64,7 @@ public class Client extends JFrame {
             System.exit(1);
         }
 
+        setLocationRelativeTo(null);
         setVisible(true);
         startListening();
     }

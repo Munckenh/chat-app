@@ -42,6 +42,7 @@ public class Server extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(400, 300);
         setContentPane(mainPanel);
+        setLocationRelativeTo(null);
         setVisible(true);
 
         display("Server started on port " + serverSocket.getLocalPort());
